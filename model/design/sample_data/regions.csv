@@ -1,0 +1,14 @@
+"code","parent","label_en","label_de","order_by"
+"ALL",,"Global","Welt",0
+"EU","ALL","European Union","Europäische Union",10
+"FR","EU","France","Frankreich",200
+"UK","ALL","United Kingdom","Großbritannien",300
+"IT","EU","Italy","Italien",400
+"DE","EU","Germany","Deutschland",100
+"ABL","DE","East Germany","Alte Bundesländer",110
+"NBL","DE","West Germany","Neue Bundesländer",120
+"BE","EU","Belgium","Belgien",50
+"BRX","BE","Brussels area","Großraum Brüssel",51
+"WAL","BE","Wallonia","Wallonien",52
+"FLA","BE","Flanders","Flandern",53
+"PO","EU","Poland","Polen",500

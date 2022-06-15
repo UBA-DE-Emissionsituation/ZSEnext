@@ -1,0 +1,13 @@
+"id","region","label_en","label_de","date","order_by"
+"DE_2020","DE","Submission 2020","Berichterstattung 2020","2020-03-21T00:00:00",3
+"DE_2021","DE","Submission 2021","Berichterstattung 2021","2021-03-18T00:00:00",4
+"DE_2022","DE","Submission 2022","Berichterstattung 2022","2022-03-16T00:00:00",5
+"DE_NEXT","DE","ZSEnext","ZSEnext","2025-03-16T00:00:00",1000
+"FR_2018","FR","Submission 2018","Berichterstattung 2018","2018-02-15T00:00:00",46
+"FR_2019","FR","Submission 2019","Berichterstattung 2019","2019-02-15T00:00:00",47
+"FR_2020","FR","Submission 2020","Berichterstattung 2020","2020-02-15T00:00:00",48
+"FR_2021","FR","Submission 2021","Berichterstattung 2021","2021-02-15T00:00:00",49
+"FR_2022","FR","Submission 2022","Berichterstattung 2022","2022-02-15T00:00:00",50
+"FR_2023","FR","Submission 2023","Berichterstattung 2023","2023-02-15T00:00:00",51
+"BE_2022","BE","Submission 2022","Berichterstattung 2022","2023-02-15T00:00:00",2
+"PO_2022","PO","Submission 2022","Berichterstattung 2022","2022-02-15T00:00:00",2

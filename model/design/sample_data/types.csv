@@ -1,0 +1,8 @@
+"short","label_en","label_de","order_by"
+"PAD","Original activity data","Primäraktivitätsrate",50
+"AD","Activity data","Aktvitätsrate",10
+"EF","Emission factor","Emissionsfaktor",11
+"EM","Emission","Emission",12
+"EM CO2eq","Emission in CO2 equivalents","Emission in CO2-Äquivalenten",60
+"SF","Split factor","Splitfaktor",70
+"ETS-EmB (CO2eq)","ETS emissions as CO2-equivalents","ETS Emissionen (CO2äq)",65

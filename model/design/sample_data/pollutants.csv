@@ -1,0 +1,33 @@
+"chemical","label_en","label_de","group","order_by"
+"CO2","Carbon dioxide","Kohlendioxid","GHG",10
+"CH4","Methane","Methan","GHG",20
+"N2O","Nitrous oxide","Lachgas","GHG",30
+"NOx","Nitrogen oxides","Stickoxide","AP",100
+"SO2","Sulphur dioxide","Schwefeldioxid","AP",110
+"NH3","Ammonia","Ammoniak","AP",130
+"NMVOC","NMVOC","NMVOC","AP",120
+"CO","Carbon monoxide","Kohlenmonoxid","AP",150
+"PM2.5","PM 2.5","Feinstaub 2.5","TSP",220
+"PM10","PM 10","Feinstaub 10","TSP",210
+"TSP","TSP","Staub","TSP",200
+"BC","Black Carbon","Black Carbon (Ruß)","TSP",250
+"Pb","Lead","Blei","HM",300
+"Hg","Mercury","Quecksilber","HM",310
+"Cd","Cadmium","Cadmium","HM",320
+"As","Arsenic","Arsen","HM",350
+"Cr","Chrome","Chrom","HM",355
+"Cu","Copper","Kupfer","HM",360
+"Ni","Nickel","Nickel","HM",365
+"Se","Selenium","Selen","HM",370
+"Zn","Zinc","Zink","HM",375
+"PCB","PCB","PCB gesamt","POP",400
+"PCDD/F","Dioxin","Dioxine","POP",410
+"BaP","BaP","BaP","POP",420
+"BbF","BbF","BbF","POP",421
+"BkF","BkF","BkF","POP",422
+"IxP","IxP","IxP","POP",423
+"PAH-4","PAH-4","PAH-4","POP",425
+"HCB","HCB","HCB","POP",430
+"Benzen","Benzen","Benzen","Other",500
+"Toluen","Toluen","Toluen","Other",510
+"Xylen","Xylen","Xylen","Other",520

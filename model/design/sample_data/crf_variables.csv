@@ -1,0 +1,7 @@
+"id","submission","category","variable","unit","export","text","name","commodity","source","target","option","method","activity","attribute","gas"
+0,"DE_NEXT","1A3c","F9687839-B864-492F-BC35-DB722EC861D2","kg","TRUE",,"Railways","Fuels","no source","no target","no option","no method","no type","Emissions","SO2"
+1,"DE_NEXT","1A3c","76160E93-4156-4F9F-B905-DB4F036DF011",,"TRUE","NCV","Railways","Solid Fuels","no source","no target","no option","no method","no type","Calorific value","no gas"
+2,"DE_NEXT","1A3c","261C650B-9138-4EF9-84AB-7E359477590E","TJ","TRUE",,"Railways","Liquid Fuels","no source","no target","no option","no method","no type","Fuel Consumption","no gas"
+3,"DE_NEXT","2B2","F7F06A12-3F8B-4C85-8FCF-40CF10E23282","kg","TRUE",,"Nitric Acid Production","no classification","no source","no target","no option","no method","no type","Emissions","N2O"
+4,"DE_NEXT","3B1a","A5D9804F-99F0-49A8-9E3C-5422EF839F39","1000s","TRUE",,"Enteric Fermentation","Dairy Cattle","no source","no target","Option A","no method","no type","Population","no gas"
+5,"DE_NEXT","3B2","7FED55AE-7214-4663-BEAB-6E6CE6616B9A","1000s","TRUE",,"Enteric Fermentation","Other Sheep.Sheep","no source","no target","no option","no method","no type","Population","no gas"

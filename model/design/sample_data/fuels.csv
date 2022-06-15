@@ -1,0 +1,10 @@
+"id","label_en","label_de","fossil","state","order_by"
+"PETROL","Petrol","Ottokraftstoff","TRUE","LIQUID",42
+"DIESEL","Gasoil","Diesel","TRUE","LIQUID",42
+"BIODIESEL","Bio-Gasoil","Biodiesel","FALSE","LIQUID",42
+"LIGNITE","Brown coal","Braunkohle","TRUE","SOLID",42
+"LIGNITE_BRIQUETTE","Brown coal briquette","Braunkohlenbrikett","TRUE","SOLID",42
+"HARDCOAL","Hard coal","Steinkohle","TRUE","SOLID",42
+"HARDCOAL_COKE","Hard coal coke","Steinkohlenkoks","TRUE","SOLID",42
+"WOOD","Wood","Holz","FALSE","SOLID",42
+"NATURAL_GAS","Natural gas","Erdgas","TRUE","GASEOUS",42
