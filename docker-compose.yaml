@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   postgres:
-    image: postgres:14
+    image: postgres:latest
     restart: always
     volumes:
     - db_data:/var/lib/postgresql/data
@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Postgres password needs to be set in .env file!}
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     restart: always
     depends_on:
     - postgres
@@ -21,7 +21,10 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?pgAdmin user name needs to be set in .env file!}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?pgAdmin password needs to be set in .env file!}
   graphql-engine:
-    image: hasura/graphql-engine:v2.7.0
+    image: hasura/graphql-engine:latest.cli-migrations-v3
+    volumes:
+      - ./model/hasura/migrations:/hasura-migrations
+      - ./model/hasura/metadata:/hasura-metadata
     ports:
     - "8080:8080"
     depends_on:
@@ -38,7 +41,7 @@ services:
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?Hasura admin secret needs to be set in .env file!}
   caddy:
-    image: caddy/caddy
+    image: caddy/caddy:latest
     depends_on:
     - "pgadmin"
     - "graphql-engine"

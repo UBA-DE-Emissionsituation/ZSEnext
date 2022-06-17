@@ -1,5 +1,6 @@
 .env
 secret.py
+model/hasura/config.yaml
 
 __pycache__/
 .ipynb_checkpoints/
