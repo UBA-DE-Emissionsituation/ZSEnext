@@ -1,0 +1,40 @@
+table:
+  schema: public
+  name: sectoral_approach
+object_relationships:
+  - name: fuel
+    using:
+      foreign_key_constraint_on: fuel_id
+  - name: pollutant
+    using:
+      foreign_key_constraint_on: pollutant_chemical
+  - name: product
+    using:
+      foreign_key_constraint_on: product_id
+  - name: region
+    using:
+      foreign_key_constraint_on: region_code
+  - name: species
+    using:
+      foreign_key_constraint_on: species_id
+  - name: submission
+    using:
+      foreign_key_constraint_on: submission_id
+  - name: value_type
+    using:
+      foreign_key_constraint_on: value_type_short
+array_relationships:
+  - name: activities
+    using:
+      foreign_key_constraint_on:
+        column: time_series_id
+        table:
+          schema: public
+          name: sectoral_approach_activities
+  - name: values
+    using:
+      foreign_key_constraint_on:
+        column: time_series_id
+        table:
+          schema: public
+          name: sectoral_approach_value

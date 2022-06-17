@@ -1,0 +1,3 @@
+table:
+  schema: public
+  name: sectoral_approach_value

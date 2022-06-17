@@ -1,0 +1,15 @@
+table:
+  schema: public
+  name: region
+object_relationships:
+  - name: parent
+    using:
+      foreign_key_constraint_on: part_of
+array_relationships:
+  - name: sub_regions
+    using:
+      foreign_key_constraint_on:
+        column: part_of
+        table:
+          schema: public
+          name: region

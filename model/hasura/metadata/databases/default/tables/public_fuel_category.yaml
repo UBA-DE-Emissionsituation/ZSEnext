@@ -1,0 +1,4 @@
+table:
+  schema: public
+  name: fuel_category
+is_enum: true
