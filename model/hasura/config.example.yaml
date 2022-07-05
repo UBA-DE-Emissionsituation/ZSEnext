@@ -1,0 +1,7 @@
+version: 3
+endpoint: http://zsenext.space-emissions.net:8080
+admin_secret: <put your password here>
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
