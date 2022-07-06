@@ -1,3 +1,7 @@
+zsenext.space-emissions.net {
+  reverse_proxy webapp:3000
+}
+
 hasura.zsenext.space-emissions.net {
   reverse_proxy graphql-engine:8080
 }

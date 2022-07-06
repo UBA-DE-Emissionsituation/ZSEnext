@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.8"
 services:
   postgres:
     image: postgres:latest
@@ -6,7 +6,7 @@ services:
     volumes:
     - db_data:/var/lib/postgresql/data
     ports:
-    - "5432:5432"
+    - 5432:5432
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Postgres password needs to be set in .env file!}
   pgadmin:
@@ -16,7 +16,6 @@ services:
     - postgres
     ports:
     - 5050:80
-    ## you can change pgAdmin default username/password with below environment variables
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?pgAdmin user name needs to be set in .env file!}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?pgAdmin password needs to be set in .env file!}
@@ -26,29 +25,37 @@ services:
       - ./model/hasura/migrations:/hasura-migrations
       - ./model/hasura/metadata:/hasura-metadata
     ports:
-    - "8080:8080"
+    - 8080:8080
     depends_on:
-    - "postgres"
+    - postgres
     restart: always
     environment:
-      ## postgres database to store Hasura metadata
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?Hasura admin secret needs to be set in .env file!}
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "guest"
       ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: "true"
-      ## uncomment next line to set an admin secret
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?Hasura admin secret needs to be set in .env file!}
+  webapp:
+    build: ./view
+    volumes:
+      - ./view/:/app
+    ports:
+      - 3000:3000
+    restart: always
+    command: npm start
   caddy:
     image: caddy/caddy:latest
     depends_on:
-    - "pgadmin"
-    - "graphql-engine"
+    - pgadmin
+    - graphql-engine
+    - webapp
     restart: always
     ports:
-    - "80:80"
-    - "443:443"
+    - 80:80
+    - 443:443
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile
     - caddy_certs:/root/.caddy

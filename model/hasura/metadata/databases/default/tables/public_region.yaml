@@ -13,3 +13,13 @@ array_relationships:
         table:
           schema: public
           name: region
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - order_by
+        - code
+        - label_de
+        - label_en
+        - part_of
+      filter: {}

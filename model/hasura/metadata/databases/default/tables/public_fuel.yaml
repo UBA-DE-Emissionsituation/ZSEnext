@@ -1,3 +1,14 @@
 table:
   schema: public
   name: fuel
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - fossil
+        - order_by
+        - category
+        - id
+        - label_de
+        - label_en
+      filter: {}
