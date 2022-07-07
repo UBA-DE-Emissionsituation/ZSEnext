@@ -1,3 +1,17 @@
 table:
   schema: public
   name: submission
+object_relationships:
+  - name: region
+    using:
+      foreign_key_constraint_on: region_code
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - date
+        - id
+        - label_de
+        - label_en
+        - order_by
+      filter: {}

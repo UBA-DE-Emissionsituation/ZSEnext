@@ -1,5 +1,9 @@
-zsenext.space-emissions.net {
+www.zsenext.space-emissions.net {
   reverse_proxy webapp:3000
+}
+
+postgres.zsenext.space-emissions.net {
+  reverse_proxy postgres:5432
 }
 
 hasura.zsenext.space-emissions.net {

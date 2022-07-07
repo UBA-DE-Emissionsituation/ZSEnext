@@ -45,6 +45,8 @@ services:
     ports:
       - 3000:3000
     restart: always
+    environment:
+      REACT_APP_GRAPHQL_ENDPOINT: ${REACT_APP_GRAPHQL_ENDPOINT:?GraphQL endpoint needs to be set in .env file!}
     command: npm start
   caddy:
     image: caddy/caddy:latest
@@ -58,7 +60,7 @@ services:
     - 443:443
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile
-    - caddy_certs:/root/.caddy
+    - caddy_data:/data
 volumes:
   db_data:
-  caddy_certs:
+  caddy_data:
