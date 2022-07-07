@@ -3,16 +3,20 @@ An emission inventory tool based on PostgreSQL, Hasura/GraphQL and a React web f
 
 ### Usage
 1. Clone this repository to a machine with `docker` and `docker-compose` installed
-2. Create an `.env` file in the project directory and put passwords
-   - POSTGRES_PASSWORD=`<password>`  # Postgres access with user 'postgres' and password given here
+2. Create an `.env` file in the project directory and put passwords and other context info:
+   - POSTGRES_PASSWORD=`<password>`
+     - Postgres access with user 'postgres' and password given here
    - PGADMIN_DEFAULT_EMAIL=`<address>`
    - PGADMIN_DEFAULT_PASSWORD=`<password>`
    - HASURA_GRAPHQL_ADMIN_SECRET=`<password>`
+   - REACT_APP_GRAPHQL_ENDPOINT=`<url>`
+     - Should look something like `https://<your-domain>/v1/graphql` 
 3. Optional: Update the `./Caddyfile` to match your domain settings
-4. From the project directory, run `docker-compose up -d`
-   - Postgres will be at `http://<your-ip>:5432`
-   - pgAdmin will be at `http://<your-ip>:5050` or even `https://pgadmin.<your-domain>` depending on your caddy configuration
-   - Hasura will be at `http://<your-ip>:8080` or even `https://hasura.<your-domain>` depending on your caddy configuration
+4. From the project directory, run `docker-compose up -d` and find, depending on your Caddy configuration:
+   - Postgres at `https://postgres.example.com` (or `http://<your-ip>:5432`)
+   - pgAdmin at `https://pgadmin.example.com` (or `http://<your-ip>:5050`)
+   - Hasura at `https://hasura.example.com` (or `http://<your-ip>:8080`)
+   - ZSEnext at `https://www.example.com`
 5. Optional: Put sample data
    - Install the Hasura CLI, see https://hasura.io/docs/latest/graphql/core/hasura-cli/install-hasura-cli/
    - Add a `config.yaml` to `model/hasura` (refer to `config.example.yaml` for inspiration)

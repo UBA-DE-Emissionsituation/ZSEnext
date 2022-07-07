@@ -13,3 +13,19 @@ array_relationships:
         table:
           schema: public
           name: region
+  - name: submissions
+    using:
+      foreign_key_constraint_on:
+        column: region_code
+        table:
+          schema: public
+          name: submission
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - code
+        - label_de
+        - label_en
+        - order_by
+      filter: {}
