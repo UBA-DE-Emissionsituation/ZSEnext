@@ -1,6 +1,6 @@
 version: 3
-endpoint: http://zsenext.space-emissions.net:8080
-admin_secret: <put your password here>
+endpoint: https://hasura.example.com
+admin_secret: <HASURA_GRAPHQL_ADMIN_SECRET>
 metadata_directory: metadata
 actions:
   kind: synchronous
