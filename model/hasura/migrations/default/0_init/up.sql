@@ -1,6 +1,47 @@
 SET check_function_bodies = false;
-CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
-COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+CREATE TABLE public.sectoral_approach (
+    id integer NOT NULL,
+    region_code text NOT NULL,
+    submission_id text NOT NULL,
+    value_type_short text NOT NULL,
+    pollutant_chemical text,
+    fuel_id text,
+    product_id text,
+    species_id text,
+    scenario text DEFAULT 'REF'::text NOT NULL,
+    crf_variable_id integer,
+    confidential boolean NOT NULL,
+    unit text NOT NULL
+);
+CREATE FUNCTION public.activity_for_sectoral_approach(activity_row public.sectoral_approach) RETURNS text
+    LANGUAGE sql STABLE
+    AS $$
+  SELECT activity_code FROM sectoral_approach_activities WHERE time_series_id = activity_row.id AND leaf
+$$;
+CREATE TABLE public.sectoral_approach_activities (
+    id integer NOT NULL,
+    time_series_id integer NOT NULL,
+    activity_code text NOT NULL,
+    level smallint NOT NULL,
+    leaf boolean NOT NULL,
+    CONSTRAINT sectoral_approach_activities_level_check CHECK ((level >= 0))
+);
+CREATE FUNCTION public.activity_is_category(activity_row public.sectoral_approach_activities) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $$
+  SELECT activity_row.activity_code SIMILAR TO '(REFERENCE_APPROACH|SECTORAL_APPROACH|\d%)'
+$$;
+CREATE FUNCTION public.set_current_timestamp_modified_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  _new record;
+BEGIN
+  _new := NEW;
+  _new.modified_at = NOW();
+  RETURN _new;
+END;
+$$;
 CREATE TABLE public.activity (
     code text NOT NULL,
     label_en text NOT NULL,
@@ -98,28 +139,6 @@ CREATE TABLE public.region (
     CONSTRAINT region_label_en_check CHECK ((char_length(label_en) > 0)),
     CONSTRAINT region_order_by_check CHECK ((order_by >= 0))
 );
-CREATE TABLE public.sectoral_approach (
-    id integer NOT NULL,
-    region_code text NOT NULL,
-    submission_id text NOT NULL,
-    value_type_short text NOT NULL,
-    pollutant_chemical text,
-    fuel_id text,
-    product_id text,
-    species_id text,
-    scenario text DEFAULT 'REF'::text NOT NULL,
-    crf_variable_id integer,
-    confidential boolean NOT NULL,
-    unit text NOT NULL
-);
-CREATE TABLE public.sectoral_approach_activities (
-    id integer NOT NULL,
-    time_series_id integer NOT NULL,
-    activity_code text NOT NULL,
-    level smallint NOT NULL,
-    leaf boolean NOT NULL,
-    CONSTRAINT sectoral_approach_activities_level_check CHECK ((level >= 0))
-);
 CREATE SEQUENCE public.sectoral_approach_activities_id_seq
     AS integer
     START WITH 1
@@ -141,6 +160,13 @@ CREATE TABLE public.sectoral_approach_value (
     year smallint NOT NULL,
     value numeric DEFAULT 0.0 NOT NULL,
     notation_key text,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_by text NOT NULL,
+    modified_at timestamp with time zone DEFAULT now() NOT NULL,
+    modified_by text NOT NULL,
+    deleted_by text,
+    deleted_at timestamp with time zone,
+    CONSTRAINT sectoral_approach_value_delete_check CHECK ((((deleted_at IS NULL) AND (deleted_by IS NULL)) OR ((deleted_at IS NOT NULL) AND (deleted_by IS NOT NULL)))),
     CONSTRAINT sectoral_approach_value_year_check CHECK ((year >= 0))
 );
 CREATE TABLE public.species (
@@ -163,6 +189,12 @@ CREATE TABLE public.submission (
     CONSTRAINT submission_label_de_check CHECK ((char_length(label_de) > 0)),
     CONSTRAINT submission_label_en_check CHECK ((char_length(label_en) > 0)),
     CONSTRAINT submission_order_by_check CHECK ((order_by >= 0))
+);
+CREATE TABLE public."user" (
+    id text NOT NULL,
+    full_name text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted boolean DEFAULT false NOT NULL
 );
 CREATE TABLE public.value_type (
     short text NOT NULL,
@@ -209,8 +241,11 @@ ALTER TABLE ONLY public.species
     ADD CONSTRAINT species_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.submission
     ADD CONSTRAINT submission_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.value_type
     ADD CONSTRAINT value_type_pkey PRIMARY KEY (short);
+CREATE TRIGGER set_public_sectoral_approach_value_modified_at BEFORE UPDATE ON public.sectoral_approach_value FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_modified_at();
 ALTER TABLE ONLY public.activity
     ADD CONSTRAINT activity_part_of_fkey FOREIGN KEY (part_of) REFERENCES public.activity(code);
 ALTER TABLE ONLY public.crf_variable
@@ -241,6 +276,12 @@ ALTER TABLE ONLY public.sectoral_approach
     ADD CONSTRAINT sectoral_approach_species_id_fkey FOREIGN KEY (species_id) REFERENCES public.species(id);
 ALTER TABLE ONLY public.sectoral_approach
     ADD CONSTRAINT sectoral_approach_submission_id_fkey FOREIGN KEY (submission_id) REFERENCES public.submission(id);
+ALTER TABLE ONLY public.sectoral_approach_value
+    ADD CONSTRAINT sectoral_approach_value_created_by_fkey FOREIGN KEY (created_by) REFERENCES public."user"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.sectoral_approach_value
+    ADD CONSTRAINT sectoral_approach_value_deleted_by_fkey FOREIGN KEY (deleted_by) REFERENCES public."user"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.sectoral_approach_value
+    ADD CONSTRAINT sectoral_approach_value_modified_by_fkey FOREIGN KEY (modified_by) REFERENCES public."user"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.sectoral_approach_value
     ADD CONSTRAINT sectoral_approach_value_notation_key_fkey FOREIGN KEY (notation_key) REFERENCES public.notation_key(key);
 ALTER TABLE ONLY public.sectoral_approach_value

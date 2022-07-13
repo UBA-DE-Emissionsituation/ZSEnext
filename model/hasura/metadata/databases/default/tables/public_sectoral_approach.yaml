@@ -38,3 +38,9 @@ array_relationships:
         table:
           schema: public
           name: sectoral_approach_value
+computed_fields:
+  - name: activity
+    definition:
+      function:
+        schema: public
+        name: activity_for_sectoral_approach

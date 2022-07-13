@@ -12,4 +12,5 @@
 - "!include public_sectoral_approach_value.yaml"
 - "!include public_species.yaml"
 - "!include public_submission.yaml"
+- "!include public_user.yaml"
 - "!include public_value_type.yaml"

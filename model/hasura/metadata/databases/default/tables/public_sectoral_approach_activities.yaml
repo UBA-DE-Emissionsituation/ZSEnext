@@ -1,3 +1,13 @@
 table:
   schema: public
   name: sectoral_approach_activities
+object_relationships:
+  - name: activity
+    using:
+      foreign_key_constraint_on: activity_code
+computed_fields:
+  - name: is_category
+    definition:
+      function:
+        schema: public
+        name: activity_is_category
