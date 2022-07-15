@@ -16,3 +16,4 @@ select_permissions:
         time_series:
           confidential:
             _eq: false
+      allow_aggregations: true

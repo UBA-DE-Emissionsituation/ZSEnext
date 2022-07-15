@@ -1,0 +1,12 @@
+query LoadDatabaseStatistics {
+  sectoral_approach_aggregate {
+    aggregate {
+      count
+    }
+  }
+  sectoral_approach_value_aggregate {
+    aggregate {
+      count
+    }
+  }
+}

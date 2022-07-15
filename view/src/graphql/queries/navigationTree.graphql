@@ -1,0 +1,16 @@
+query ListSubmissions {
+  region(order_by: {order_by: asc}, where: {submissions: {}}) {
+    code
+    label_en
+    order_by
+    parent {
+      label_en
+    }
+    submissions(order_by: {order_by: asc}) {
+      id
+      label_en
+      date
+      order_by
+    }
+  }
+}
